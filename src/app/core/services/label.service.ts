@@ -297,6 +297,18 @@ export class LabelService {
         throw new Error('Unexpected error: the repo has multiple labels with the same name ' + label.getFormattedName());
       }
     });
+
+    actualLabels.forEach((label) => {
+      // Check if each label in the repo is required
+      const nameMatchedLabels: Label[] = requiredLabels.filter(
+        (requiredLabel) => label.getFormattedName() === requiredLabel.getFormattedName()
+      );
+
+      if (nameMatchedLabels.length === 0) {
+        // Delete the current label if it is not required
+        this.githubService.deleteLabel(label.getFormattedName());
+      }
+    });
   }
 
   /**
