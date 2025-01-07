@@ -54,24 +54,24 @@ export class ErrorHandlingService implements ErrorHandler {
 
     switch (error.status) {
       case 500: // Internal Server Error.
-        this.snackBar.openFromComponent(GeneralMessageErrorComponent, { data: error, duration: this.snackBarAutoCloseTime });
+        this.snackBar.openFromComponent(GeneralMessageErrorComponent, { data: error });
         break;
       case 422: // Form errors
-        this.snackBar.openFromComponent(FormErrorComponent, { data: error, duration: this.snackBarAutoCloseTime });
+        this.snackBar.openFromComponent(FormErrorComponent, { data: error });
         break;
       case 400: // Bad request
       case 401: // Unauthorized
       case 404: // Not found
-        this.snackBar.openFromComponent(GeneralMessageErrorComponent, { data: error, duration: this.snackBarAutoCloseTime });
+        this.snackBar.openFromComponent(GeneralMessageErrorComponent, { data: error });
         break;
       default:
-        this.snackBar.openFromComponent(GeneralMessageErrorComponent, { data: error, duration: this.snackBarAutoCloseTime });
+        this.snackBar.openFromComponent(GeneralMessageErrorComponent, { data: error });
         return;
     }
   }
 
   private handleGeneralError(error: string): void {
-    this.snackBar.openFromComponent(GeneralMessageErrorComponent, { data: { message: error }, duration: this.snackBarAutoCloseTime });
+    this.snackBar.openFromComponent(GeneralMessageErrorComponent, { data: { message: error } });
   }
 
   clearError() {
