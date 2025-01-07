@@ -14,6 +14,7 @@ const FILTERABLE = ['node_modules'];
   providedIn: 'root'
 })
 export class ErrorHandlingService implements ErrorHandler {
+  snackBarAutoCloseTime = 3000;
   constructor(private snackBar: MatSnackBar, private logger: LoggingService) {}
 
   handleError(error: HttpErrorResponse | Error | RequestError, actionCallback?: () => void) {
@@ -53,24 +54,24 @@ export class ErrorHandlingService implements ErrorHandler {
 
     switch (error.status) {
       case 500: // Internal Server Error.
-        this.snackBar.openFromComponent(GeneralMessageErrorComponent, { data: error });
+        this.snackBar.openFromComponent(GeneralMessageErrorComponent, { data: error, duration: this.snackBarAutoCloseTime });
         break;
       case 422: // Form errors
-        this.snackBar.openFromComponent(FormErrorComponent, { data: error });
+        this.snackBar.openFromComponent(FormErrorComponent, { data: error, duration: this.snackBarAutoCloseTime });
         break;
       case 400: // Bad request
       case 401: // Unauthorized
       case 404: // Not found
-        this.snackBar.openFromComponent(GeneralMessageErrorComponent, { data: error });
+        this.snackBar.openFromComponent(GeneralMessageErrorComponent, { data: error, duration: this.snackBarAutoCloseTime });
         break;
       default:
-        this.snackBar.openFromComponent(GeneralMessageErrorComponent, { data: error });
+        this.snackBar.openFromComponent(GeneralMessageErrorComponent, { data: error, duration: this.snackBarAutoCloseTime });
         return;
     }
   }
 
   private handleGeneralError(error: string): void {
-    this.snackBar.openFromComponent(GeneralMessageErrorComponent, { data: { message: error } });
+    this.snackBar.openFromComponent(GeneralMessageErrorComponent, { data: { message: error }, duration: this.snackBarAutoCloseTime });
   }
 
   clearError() {
