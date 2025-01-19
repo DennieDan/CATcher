@@ -286,7 +286,8 @@ export class Issue {
   // Template url: https://github.com/CATcher-org/templates#teams-response-1
   createGithubTesterResponse(): string {
     return (
-      '[IMPORTANT!: Please do not edit or reply to this comment using the GitHub UI. You can respond to it using CATcher during the next phase of the PE]\n' +
+      '[IMPORTANT!: Please do not edit or reply to this comment using the GitHub UI. ' +
+      'You can respond to it using CATcher during the next phase of the PE]\n' +
       `# Team\'s Response\n${this.teamResponse}\n` +
       `# Items for the Tester to Verify\n${this.getTesterResponsesString(this.testerResponses)}`
     );
